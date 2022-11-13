@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+				http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd 
+	           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> 	
+ 		<!-- <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/> -->
+	 	<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="tiger"/>
+		<property name="minimumIdle" value="5"/>
+	</bean> 
+	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<qualifier value="hikarids"/>
+		<constructor-arg ref="hikariConfig"/>
+	</bean> 
+	
+	<!-- 21.03.19 금요일 오후 작성 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+	
+	<!-- <context:component-scan base-package="com.my.vo" /> -->
+	<context:component-scan base-package="com.my.dao" />
+	<context:component-scan base-package="com.my.service" />
+	
+	
+	<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="tiger"/>
+	</bean> -->
+</beans>
