@@ -28,7 +28,6 @@ public class BoardController {
 	
 	@Autowired
 	private RepBoardService service;
-	
 	// 컨텍스트이름이 springmvc인데 브라우저에 a라고 해야 요청이된다.
 	@RequestMapping("/detail")
 	@ResponseBody

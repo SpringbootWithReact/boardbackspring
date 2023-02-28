@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>	
+	<properties>
+		<property name="username" value="scott"/>
+	</properties>
+	
+	<typeAliases>
+		<typeAlias alias="RepBoard" type="com.my.vo.RepBoard" />
+	</typeAliases>
+	
+	<!--맵핑할 xml파일을 등록(상대경로를  쓸수도 있고 절대경로를  쓸 수도 있다.  -->
+	<mappers>
+		<mapper resource="boardMapper.xml" />
+		<!-- <mapper resource="orderMapper.xml" /> -->
+	</mappers>
+</configuration>
